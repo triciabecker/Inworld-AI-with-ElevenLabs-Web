@@ -77,7 +77,6 @@ const createClient = async function () {
       key: process.env.INWORLD_KEY,
       secret: process.env.INWORLD_SECRET,
     })
-    .setUser({ fullName: 'Trisha' })
     .setConfiguration({
       capabilities: { audio: true, emotions: true },
       connection: {
@@ -85,7 +84,7 @@ const createClient = async function () {
         autoReconnect: false,
       }
     })
-    .setScene(process.env.GROYVER_SCENE)
+    .setScene(process.env.INWORLD_SCENE)
     .setOnError((err) => console.error(err))
     .setOnMessage((packet) => {
       if (packet.isText()) {
@@ -103,7 +102,7 @@ const createClient = async function () {
         voice
           .textToSpeechStream(
             process.env.ELEVENLABS_KEY,
-            process.env.GROYVER_VOICE,
+            process.env.ELEVENLABS_CHARACTER,
             responseArrayString
           )
           .then((res) => {
@@ -119,13 +118,11 @@ const createClient = async function () {
         cleanup();
 
         rl.question("Keep the conversation going - hit enter and speak again.", (answer) => {
-          // rl.close();
           recordAudio();
         });
       }
     })
     .setOnDisconnect(() => {
-      //can't get this working, don't know why
       console.log("now disconnected");
     })
 
