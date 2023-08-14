@@ -1,0 +1,11 @@
+# Dependency directories
+node_modules/
+
+# Local version control
+loc-version-control/
+
+# Audio files
+*.mp3
+
+# Env variables
+*.env
